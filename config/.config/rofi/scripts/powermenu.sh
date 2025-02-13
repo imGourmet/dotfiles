@@ -14,7 +14,7 @@
 #
 
 # Current Theme
-dir="$HOME/.config/bspwm/rofi/"
+dir="$HOME/.config/rofi/"
 theme='powermenu'
 
 # CMDs

@@ -18,7 +18,7 @@ export XDG_CURRENT_DESKTOP='bspwm'
 pgrep -x sxhkd > /dev/null || sxhkd &
 feh --no-fehbg --bg-fill /home/andrew/Desktop/Fondos/fondo.jpg & # Fondo actualizado
 picom & # Compositor
-flameshot & # Capturas de pantalla
+cvlc -vvv --daemon --extraintf rc --rc-unix ~/.config/vlc/vlc.sock & # Demonio VLC
 alsa & # Control de sonido
 ~/.config/polybar/launch.sh & # Script adicional de inicio
 
@@ -57,3 +57,6 @@ bspc config split_ratio 0.52 & # Ajustado a tu preferencia
 ##bspc config automatic_scheme longest_side
 ##bspc config initial_polarity second_child
 ##bspc config removal_adjustment true
+
+pgrep -x cvlc > /dev/null && echo "cvlc is running" || echo "cvlc is not running" >> ~/.config/vlc/cvlc.log
+wmname LG3D &

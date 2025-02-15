@@ -2,10 +2,7 @@
 import feedparser
 
 rss_urls = [
-    "https://feeds.megaphone.fm/GLT1412515089",
-    "https://feeds.megaphone.fm/SED2675996583",
-    "https://feeds.simplecast.com/dLRotFGk",
-    "https://feeds.simplecast.com/XA_851k3"
+    "https://feeds.megaphone.fm/GLT1412515089"
 ]
 
 num_episodes = 2

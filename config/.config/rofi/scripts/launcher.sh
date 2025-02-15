@@ -8,4 +8,4 @@
 #
 # Current Theme:
 
-rofi -show drun -icon-theme "Adwaita" -theme /home/andrew/.config/rofi/launcher.rasi -display-drun "󰕮  |" &
+rofi -show drun -icon-theme "Adwaita" -theme /home/andrew/.config/rofi/launcher.rasi -display-drun "󰣇  |" &

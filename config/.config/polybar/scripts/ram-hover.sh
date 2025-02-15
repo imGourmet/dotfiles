@@ -3,9 +3,8 @@
 ACTION=$1
 WINDOW_ID_FILE="/tmp/ram_hover_window"
 
-# Function to get detailed RAM info
 get_ram_info() {
-    # Get memory stats
+
     mem_info=$(free -h | grep Mem)
     buffers=$(free -h | grep -m 1 Buffers | awk '{print $3}')
     cached=$(free -h | grep -m 1 Buffers | awk '{print $4}')
@@ -19,7 +18,7 @@ get_ram_info() {
     echo "Swap Usage:"
     free -h | grep Swap
 }
-# Function to get a more detailed process list sorted by RAM usage
+
 get_process_list() {
     echo "PID (PPID) Command                     %RAM   %CPU"
     echo "----------------------------------------------------------"
@@ -27,7 +26,6 @@ get_process_list() {
     awk 'NR>1 {printf "%-12s %-30s %-6s %-6s\n", $1 " (" $2 ")", $3, $4, $5}'
 }
 
-# Function to get memory usage by user
 get_user_memory_usage() {
     echo "Memory Usage by User:"
     echo "---------------------------------------"
@@ -38,20 +36,18 @@ get_user_memory_usage() {
 
 if [[ "$ACTION" == "toggle" ]]; then
     if [[ -f $WINDOW_ID_FILE ]]; then
-        # Close the window if it's running
+
         WINDOW_PID=$(cat $WINDOW_ID_FILE)
         wmctrl -ic $WINDOW_PID
         rm $WINDOW_ID_FILE
     else
-        # Get mouse position
+
         eval "$(xdotool getmouselocation --shell)"
 
-        # Create a temporary FIFO file to stream live updates
         FIFO="/tmp/ram_hover_fifo"
         rm -f "$FIFO"
         mkfifo "$FIFO"
 
-        # Start background process to update info dynamically (without stacking)
         (
             while true; do
                 printf "%s\n\n%s\n\n%s\n" "$(get_ram_info)" "$(get_process_list)" "$(get_user_memory_usage)" > "$FIFO"
@@ -59,17 +55,14 @@ if [[ "$ACTION" == "toggle" ]]; then
             done
         ) &
 
-        # Open YAD window with live data (forcing UTF-8 encoding)
         yad --text-info --posx=$X --posy=$((Y + 20)) \
             --no-buttons --undecorated --fixed --skip-taskbar \
             --close-on-unfocus --width=400 --height=400 --fontname="monospace" \
             --wrap --fontname="Hack Nerd Font 10" --encoding=UTF-8 < "$FIFO" &
 
-        # Store the window ID
         WINDOW_ID=$(xdotool getactivewindow)
         echo $WINDOW_ID > $WINDOW_ID_FILE
 
-        # Clean up FIFO when the window closes
         (sleep 5 && rm -f "$FIFO") &
     fi
 fi

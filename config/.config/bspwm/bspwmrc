@@ -22,6 +22,9 @@ flameshot & # Capturas de pantalla
 alsa & # Control de sonido
 ~/.config/polybar/launch.sh & # Script adicional de inicio
 
+# Regla para forzar mensajes yad flotantes
+bspc rule -a yad state=floating
+
 # Regla para fijar la polibar (Dedicated Window Class)
 bspc rule -a polybar:Polybar floating=on sticky=on above=on &
 

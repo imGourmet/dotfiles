@@ -14,12 +14,16 @@ super + d
 super + shift + f
 	/usr/bin/firefox
 
+# Screenshot
+super + shift + s
+	flameshot gui
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
 
 # Open Yazi (File Explorer)
-super + e
+super + shitft + e
     /opt/kitty/bin/kitty -e yazi
 
 

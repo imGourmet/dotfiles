@@ -14,13 +14,11 @@ bspc monitor -d 'I' 'II' 'III' 'IV' 'V' 'VI' 'VII' 'VIII' 'IX' 'X' &
 #*****----- BSPWM Launch -----*****
 export XDG_CURRENT_DESKTOP='bspwm'
 
-# Ejecutar programas al inicio
+# Programas de inicio (Autorun)
 pgrep -x sxhkd > /dev/null || sxhkd &
-feh --no-fehbg --bg-fill /home/andrew/Desktop/Fondos/fondo.jpg & # Fondo actualizado
-picom & # Compositor
-cvlc -vvv --daemon --extraintf rc --rc-unix ~/.config/vlc/vlc.sock & # Demonio VLC
-alsa & # Control de sonido
-~/.config/polybar/launch.sh & # Script adicional de inicio
+feh --no-fehbg --bg-fill /home/andrew/Desktop/Fondos/fondo.jpg & 
+picom & 
+alsa & 
 
 # Regla para forzar mensajes yad flotantes
 bspc rule -a yad state=floating
@@ -39,7 +37,7 @@ bspc config border_width 0 &
 xsetroot -cursor_name left_ptr &
 
 #*****----- BSPWM Configs -----*****
-bspc config top_padding 45 & # This setting I only used to avoid overlaping with polybar.
+bspc config top_padding 45 &
 bspc config focus_follows_pointer true &
 bspc config pointer_modifier super &
 bspc config pointer_action1 move &
@@ -58,5 +56,7 @@ bspc config split_ratio 0.52 & # Ajustado a tu preferencia
 ##bspc config initial_polarity second_child
 ##bspc config removal_adjustment true
 
-pgrep -x cvlc > /dev/null && echo "cvlc is running" || echo "cvlc is not running" >> ~/.config/vlc/cvlc.log
+# Polybar Launch
 wmname LG3D &
+~/.config/polybar/launch.sh 
+
